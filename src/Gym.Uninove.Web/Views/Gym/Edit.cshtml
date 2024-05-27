@@ -1,0 +1,158 @@
+﻿@model Gym.Uninove.Web.Models.ViewModels.GymBranchViewModel
+
+@{
+    ViewData["Title"] = "Details Gym";
+}
+
+<div class="d-flex p-3 my-3 text-white bg-secondary rounded shadow-sm">
+    <div class="d-flex align-items-center mr-auto">
+        <span style="font-size: 48px;"><i class="fa-solid fa-dumbbell"></i></span>
+        <div class="lh-100 ml-3">
+            <h2 class="mb-0 lh-100">@ViewData["Title"]</h2>
+            <small>@Model.GymBranch.Name</small>
+        </div>
+    </div>
+    <div class="d-flex align-items-center">
+        <a class="btn btn-sm btn-outline-light" asp-action="Index">All Gyms</a>
+    </div>
+</div>
+
+
+<section class="vh-100 gradient-custom">
+    <div class="container py-3">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-12 col-xl-12">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+
+                                    <div data-mdb-input-init class="form-outline">
+                                        <label asp-for="@Model.GymBranch.Name" class="form-label"></label>
+                                        <input asp-for="@Model.GymBranch.Name" class="form-control form-control-lg" />
+                                        <span asp-validation-for="@Model.GymBranch.Name" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 mb-4">
+
+                                    <div data-mdb-input-init class="form-outline">
+                                        <label asp-for="@Model.GymBranch.UnitNumber" class="form-label"></label>
+                                        <input asp-for="@Model.GymBranch.UnitNumber" class="form-control form-control-lg" />
+                                        <span asp-validation-for="@Model.GymBranch.UnitNumber" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4 d-flex align-items-center">
+
+                                    <div data-mdb-input-init class="form-outline datepicker w-100">
+                                        <label asp-for="@Model.GymBranch.Phone" class="form-label"></label>
+                                        <input asp-for="@Model.GymBranch.Phone" class="form-control form-control-lg" />
+                                        <span asp-validation-for="@Model.GymBranch.Phone" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 mb-4">
+
+                                    <div data-mdb-input-init class="form-outline datepicker w-100">
+                                        <label asp-for="@Model.Address.Street" class="form-label"></label>
+                                        <input asp-for="@Model.Address.Street" class="form-control form-control-lg" />
+                                        <span asp-validation-for="@Model.Address.Street" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4 pb-2">
+
+                                    <div data-mdb-input-init class="form-outline">
+                                        <label asp-for="@Model.Address.Number" class="form-label"></label>
+                                        <input asp-for="@Model.Address.Number" class="form-control form-control-lg" />
+                                        <span asp-validation-for="@Model.Address.Number" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 mb-4 pb-2">
+
+                                    <div data-mdb-input-init class="form-outline">
+                                        <label asp-for="@Model.Address.ZipCode" class="form-label"></label>
+                                        <input asp-for="@Model.Address.ZipCode" class="form-control form-control-lg" />
+                                        <span asp-validation-for="@Model.Address.ZipCode" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4 pb-2">
+
+                                    <div data-mdb-input-init class="form-outline">
+                                        <label asp-for="@Model.Address.Neighborhood" class="form-label"></label>
+                                        <input asp-for="@Model.Address.Neighborhood" class="form-control form-control-lg" />
+                                        <span asp-validation-for="@Model.Address.Neighborhood" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 mb-4 pb-2">
+
+                                    <div data-mdb-input-init class="form-outline">
+                                        <label asp-for="@Model.Address.Complement" class="form-label"></label>
+                                        <input asp-for="@Model.Address.Complement" class="form-control form-control-lg" />
+                                        <span asp-validation-for="@Model.Address.Complement" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4 pb-2">
+
+                                    <div data-mdb-input-init class="form-outline">
+                                        <label asp-for="@Model.Address.State" class="form-label"></label>
+                                        <input asp-for="@Model.Address.State" class="form-control form-control-lg" />
+                                        <span asp-validation-for="@Model.Address.State" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 mb-4 pb-2">
+
+                                    <div data-mdb-input-init class="form-outline">
+                                        <label asp-for="@Model.Address.City" class="form-label"></label>
+                                        <input asp-for="@Model.Address.City" class="form-control form-control-lg" />
+                                        <span asp-validation-for="@Model.Address.City" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+
+                                    <select class="select form-control-lg">
+                                        <option value="1" disabled>Choose option</option>
+                                        <option value="2">Subject 1</option>
+                                        <option value="3">Subject 2</option>
+                                        <option value="4">Subject 3</option>
+                                    </select>
+                                    <label class="form-label select-label">Choose option</label>
+
+                                </div>
+                            </div>
+
+                            <div class="mt-4 pt-2">
+                                <input data-mdb-ripple-init class="btn btn-primary btn-lg" asp-action="Edit" asp-route-id="@Model.GymBranch.Id" type="submit" value="Submit" />
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
