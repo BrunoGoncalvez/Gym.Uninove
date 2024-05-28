@@ -1,0 +1,42 @@
+﻿@model Gym.Uninove.Core.Entities.Teacher
+
+@{
+    ViewData["Title"] = "Remover Instrutor";
+}
+
+
+<div class="d-flex p-3 my-3 text-white bg-secondary rounded shadow-sm">
+    <div class="d-flex align-items-center mr-auto">
+        <span style="font-size: 48px;"><i class="fa-solid fa-user-graduate"></i></span>
+        <div class="lh-100 ml-3">
+            <h2 class="mb-0 lh-100">@ViewData["Title"]</h2>
+            <small>@Model.Name</small>
+        </div>
+    </div>
+    <div class="d-flex align-items-center">
+        <a class="btn btn-sm btn-outline-light" asp-action="Index">Instrutor</a>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center container mt-5">
+    <div class="card p-3 bg-white" style="width: 500px;">
+        <i class="fa fa-apple"></i>
+        <div class="about-product text-center mt-2">
+            <img src="https://i.imgur.com/3VTaSeb.png" style="width: 100%;">
+            <div>
+                <h4>@Model.Name</h4>
+                <h6 class="mt-0 text-black-50">Unidade: @Model.Description</h6>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <form asp-action="DeleteConfirmed">
+                <input type="hidden" asp-for="@Model.Id" />
+                <input type="submit" value="Delete" class="btn btn-sm btn-danger" />
+                <a asp-action="Index" class="btn btn-sm btn-primary">Home</a>
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            </form>
+        </div>
+
+    </div>
+</div>

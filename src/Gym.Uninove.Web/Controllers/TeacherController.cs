@@ -1,5 +1,5 @@
-﻿using Gym.Uninove.Core.Interfaces.Repository;
-using Microsoft.AspNetCore.Http;
+﻿using Gym.Uninove.Core.Entities;
+using Gym.Uninove.Core.Interfaces.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gym.Uninove.Web.Controllers
@@ -34,57 +34,90 @@ namespace Gym.Uninove.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(Teacher teacher)
         {
             try
             {
+                if (!ModelState.IsValid) return View(teacher);
+
+                await this._teacherRepository.Add(teacher);
+                await this._teacherRepository.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                ModelState.AddModelError(string.Empty, "Ocorreu um erro ao adicionar Instrutor. Tente mais tarde.");
+                return View(teacher);
             }
         }
 
 
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            var teacher = await this._teacherRepository.GetById(id);
+            return View(teacher);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, Teacher newTeacher)
         {
             try
             {
+                if (!ModelState.IsValid) return View(newTeacher);
+                var oldTeacher = await this._teacherRepository.GetById(id);
+
+                oldTeacher.Name = newTeacher.Name;
+                oldTeacher.Description = newTeacher.Description;
+
+                await this._teacherRepository.Update(oldTeacher);
+                await this._teacherRepository.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError(string.Empty, "Ocorreu um erro ao alterar Instrutor. Tente mais tarde.");
+                return View(newTeacher);
             }
         }
 
 
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return View();
+            var teacher = await this._teacherRepository.GetById(id);
+            if (teacher == null)
+            {
+                ModelState.AddModelError(string.Empty, "Instrutor não encontrada.");
+                return RedirectToAction(nameof(Index));
+            }
+            return View(teacher);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(int id, Teacher teacher)
         {
             try
             {
+                var oldTeacher = await this._teacherRepository.GetById(id);
+                if (teacher.Id != oldTeacher.Id)
+                {
+                    ModelState.AddModelError(string.Empty, "Instrutor não encontrado.");
+                    return View(teacher);
+                }
+
+                await this._teacherRepository.Delete(teacher.Id);
+                await this._teacherRepository.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError(string.Empty, "Erro ao Remover Instrutor");
+                return RedirectToAction(nameof(Index));
             }
         }
     }

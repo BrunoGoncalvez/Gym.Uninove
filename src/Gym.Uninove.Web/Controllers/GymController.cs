@@ -160,7 +160,7 @@ namespace Gym.Uninove.Web.Controllers
             if (gym == null) 
             {
                 ModelState.AddModelError(string.Empty, "Gym não encontrada.");
-                return View(gym);
+                return RedirectToAction(nameof(Index));
             }
 
             return View(gym);
