@@ -41,7 +41,11 @@
                         <p class="card-text">Unidade: @gym.UnitNumber</p>
 
                         <p class="card-text">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
+                            @if(isAdmin)
+                            {
+                                <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@gym.Id"><i class="fa fa-pencil-alt"></i></a>
+                                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@gym.Id"><i class="fa fa-trash"></i></a>
+                            }
                         </p>
                     </div>
                 </div>
@@ -50,13 +54,6 @@
 
     </div>
 </div>
-
-<!-- Paginação -->
-@* <div class="row">
-    <div class="col">
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded })
-    </div>
-</div> *@
 
 <!-- Paginação -->
 <div class="row">
