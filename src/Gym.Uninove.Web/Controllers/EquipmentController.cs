@@ -1,5 +1,7 @@
-﻿using Gym.Uninove.Core.Interfaces.Repository;
+﻿using Gym.Uninove.Core.Entities;
+using Gym.Uninove.Core.Interfaces.Repository;
 using Gym.Uninove.Web.Models;
+using Gym.Uninove.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -45,10 +47,25 @@ namespace Gym.Uninove.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(EquipmentViewModel model)
         {
+
+            if(!ModelState.IsValid) return View(model);
+
             try
             {
+
+                var equipment = new Equipment
+                {
+                    Name = model.Name,
+                    StatusPurchase = model.StatusPurchase,
+                    DatePurchase = model.DatePurchase,
+                    UsageTime = DateTime.Now
+                };
+
+                await this._equipmentRepository.Add(equipment);
+                await this._equipmentRepository.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -57,17 +74,24 @@ namespace Gym.Uninove.Web.Controllers
             }
         }
 
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            var quipment = await this._equipmentRepository.GetById(id);
+            return View(quipment);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, Equipment equipment)
         {
+
+            if(!ModelState.IsValid) return View(equipment);
+            if(id != equipment.Id) return View(equipment);
+
             try
             {
+                await this._equipmentRepository.Update(equipment);
+                await _equipmentRepository.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             catch
