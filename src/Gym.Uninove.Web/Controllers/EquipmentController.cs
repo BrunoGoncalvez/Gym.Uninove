@@ -100,21 +100,39 @@ namespace Gym.Uninove.Web.Controllers
             }
         }
 
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return View();
+            var equipment = await this._equipmentRepository.GetById(id);
+            if (equipment == null)
+            {
+                ModelState.AddModelError(string.Empty, "Equipamento não encontrada.");
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(equipment);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             try
             {
+                var equipment = await this._equipmentRepository.GetById(id);
+                if (equipment == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Equipamento não encontrada.");
+                    return View(equipment);
+                }
+
+                await this._equipmentRepository.Delete(equipment.Id);
+                await this._equipmentRepository.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
+                ModelState.AddModelError(string.Empty, "Erro ao remover Equipamento. Tente mais tarde.");
                 return View();
             }
         }
