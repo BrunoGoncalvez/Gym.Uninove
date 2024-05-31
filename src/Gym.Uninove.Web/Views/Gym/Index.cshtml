@@ -1,7 +1,4 @@
-﻿@* @model IEnumerable<Gym.Uninove.Core.Entities.GymBranch> *@
-
-@using X.PagedList.Mvc.Core
-@model X.PagedList.IPagedList<Gym.Uninove.Core.Entities.GymBranch>
+﻿@model IEnumerable<Gym.Uninove.Core.Entities.GymBranch>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -38,7 +35,9 @@
                     <div class="card-body">
 
                         <h5 class="card-title">@gym.Name</h5>
-                        <p class="card-text">Unidade: @gym.UnitNumber</p>
+                        <p class="card-text"><strong>Unidade:</strong> @gym.UnitNumber</p>
+                        <p class="card-text"><Strong>Endereço:</Strong> @String.Format("{0}, {1} - {2}", @gym.Address.Street, @gym.Address.Number, gym.Address.Neighborhood) </p>
+                        <p class="card-text"><strong>Phone:</strong> @gym.Phone </p>
 
                         <p class="card-text">
                             @if(isAdmin)
@@ -52,17 +51,6 @@
             </div>
         }
 
-    </div>
-</div>
-
-<!-- Paginação -->
-<div class="row">
-    <div class="col">
-        <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded })
-            </ul>
-        </nav>
     </div>
 </div>
 

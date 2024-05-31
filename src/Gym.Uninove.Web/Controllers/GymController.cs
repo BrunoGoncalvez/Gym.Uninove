@@ -37,19 +37,8 @@ namespace Gym.Uninove.Web.Controllers
                 TempData["Admin"] = userCurrent.Role == "2" ? true : false;
             }
 
+            return View(await this._gymRepository.GetAllGymWithAddress());
 
-            var pageNumber = page ?? 1; // Número da página atual
-            var gyms = await _gymRepository.GetAll(); // Obtenha todos os registros (gym)
-
-            // Converta a tarefa para a lista real de gyms
-            var gymList = gyms.ToList();
-
-            // Use o método ToPagedList() para paginar a lista
-            var pagedList = gymList.ToPagedList(pageNumber, PageSize);
-
-            return View(pagedList);
-
-            //return View(await this._gymRepository.GetAll());
         }
 
 

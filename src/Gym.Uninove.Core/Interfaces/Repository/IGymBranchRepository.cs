@@ -7,6 +7,8 @@ namespace Gym.Uninove.Core.Interfaces.Repository
 
         Task<GymBranch> GetGymWithAddress(int id);
 
+        Task<IEnumerable<GymBranch>> GetAllGymWithAddress();
+
         void ClearChangeTracker();
 
     }

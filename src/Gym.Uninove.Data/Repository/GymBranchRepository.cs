@@ -25,5 +25,12 @@ namespace Gym.Uninove.Data.Repository
         {
             _context.ChangeTracker.Clear();
         }
+
+        public async Task<IEnumerable<GymBranch>> GetAllGymWithAddress()
+        {
+            var gyms = await _context.Gyms.AsNoTracking().Include(g => g.Address).ToListAsync();
+            return gyms;
+        }
+
     }
 }
