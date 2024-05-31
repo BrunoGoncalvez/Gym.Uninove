@@ -19,7 +19,7 @@ namespace Gym.Uninove.Core.Entities
         [RegularExpression(@"^\(\d{2}\) \d{5}-\d{4}$", ErrorMessage = "Phone must be in the format (11) 99999-9999")]
         public string Phone { get; set; }
 
-
+        public string ImagePath { get; set; }
 
         public Address Address { get; set; }
 

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gym.Uninove.Data.Migrations
 {
     [DbContext(typeof(GymContext))]
-    [Migration("20240526215135_Initial")]
+    [Migration("20240531053005_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,7 +32,6 @@ namespace Gym.Uninove.Data.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Complement")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("GymId")
@@ -123,6 +122,9 @@ namespace Gym.Uninove.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -137,29 +139,6 @@ namespace Gym.Uninove.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Gyms");
-                });
-
-            modelBuilder.Entity("Gym.Uninove.Core.Entities.ImageUrl", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Path")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("ProfileId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProfileId")
-                        .IsUnique();
-
-                    b.ToTable("ImageUrl");
                 });
 
             modelBuilder.Entity("Gym.Uninove.Core.Entities.Membership", b =>
@@ -235,26 +214,16 @@ namespace Gym.Uninove.Data.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("GroupClassId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MembershipId")
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Password")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Role")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("longtext");
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GroupClassId");
-
-                    b.HasIndex("MembershipId");
 
                     b.ToTable("Users");
                 });
@@ -292,17 +261,6 @@ namespace Gym.Uninove.Data.Migrations
                     b.Navigation("Instructor");
                 });
 
-            modelBuilder.Entity("Gym.Uninove.Core.Entities.ImageUrl", b =>
-                {
-                    b.HasOne("Gym.Uninove.Core.Entities.Users.Profile", "Profile")
-                        .WithOne("Photo")
-                        .HasForeignKey("Gym.Uninove.Core.Entities.ImageUrl", "ProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Profile");
-                });
-
             modelBuilder.Entity("Gym.Uninove.Core.Entities.Teacher", b =>
                 {
                     b.HasOne("Gym.Uninove.Core.Entities.GymBranch", null)
@@ -321,26 +279,6 @@ namespace Gym.Uninove.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Gym.Uninove.Core.Entities.Users.User", b =>
-                {
-                    b.HasOne("Gym.Uninove.Core.Entities.GroupClass", null)
-                        .WithMany("Students")
-                        .HasForeignKey("GroupClassId");
-
-                    b.HasOne("Gym.Uninove.Core.Entities.Membership", "Membership")
-                        .WithMany("Members")
-                        .HasForeignKey("MembershipId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Membership");
-                });
-
-            modelBuilder.Entity("Gym.Uninove.Core.Entities.GroupClass", b =>
-                {
-                    b.Navigation("Students");
-                });
-
             modelBuilder.Entity("Gym.Uninove.Core.Entities.GymBranch", b =>
                 {
                     b.Navigation("Address");
@@ -350,16 +288,6 @@ namespace Gym.Uninove.Data.Migrations
                     b.Navigation("GroupClasses");
 
                     b.Navigation("Instructors");
-                });
-
-            modelBuilder.Entity("Gym.Uninove.Core.Entities.Membership", b =>
-                {
-                    b.Navigation("Members");
-                });
-
-            modelBuilder.Entity("Gym.Uninove.Core.Entities.Users.Profile", b =>
-                {
-                    b.Navigation("Photo");
                 });
 #pragma warning restore 612, 618
         }

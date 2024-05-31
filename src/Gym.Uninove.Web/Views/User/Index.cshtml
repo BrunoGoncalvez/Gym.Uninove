@@ -1,18 +1,19 @@
-﻿@model IEnumerable<Gym.Uninove.Core.Entities.Teacher>
+﻿@model IEnumerable<Gym.Uninove.Core.Entities.Users.User>
 
 @{
-    ViewData["Title"] = "Instrutores";
+    ViewData["Title"] = "Usuários";
 }
 
 <div class="d-flex p-3 my-3 text-white bg-secondary rounded shadow-sm">
     <div class="d-flex align-items-center mr-auto">
-        <span style="font-size: 48px; margin-right: 20px;"><i class="fa-solid fa-user-graduate"></i></span>
+        <span style="font-size: 48px; margin-right: 20px;"><i class="fa-solid fa-users"></i></span>
         <div class="lh-100">
             <h2 class="mb-0 lh-100">@ViewData["Title"]</h2>
             <small>Todos @ViewData["Title"]</small>
         </div>
     </div>
 </div>
+
 
 <div class="row">
 
@@ -26,7 +27,7 @@
                         <div class="input-group-prepend">
                             <label class="input-group-text">Search</label>
                         </div>
-                        <input type="text" class="form-control" placeholder="Search Instructor">
+                        <input type="text" class="form-control" placeholder="Search User">
                     </div>
                 </div>
 
@@ -42,35 +43,34 @@
             <table class="table table-striped mt-2">
                 <thead class="thead-dark">
                     <tr class="text-center">
-                        <th class="d-none d-md-table-cell" (click)="showImage_Click()">
+                        <th class="d-none d-md-table-cell">
                             <button class="btn btn-sm btn-outline-light">
                                 <i class="fa-solid fa-eye"></i>
                             </button>
                         </th>
-                        <th>#</th>
+                        <th class="d-none d-md-table-cell">#</th>
                         <th>Nome</th>
-                        <th>Descrição</th>
+                        <th>Email</th>
                         <th>Options</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach (var teacher in Model)
+                    @foreach (var user in Model)
                     {
                         <tr class="text-center">
                             <td class="d-none d-md-table-cell">
                                 <img src="" />
                             </td>
-                            <td>@teacher.Id</td>
-                            <td>@teacher.Name</td>
-                            <td>@teacher.Description</td>
-                            <td>
-                                <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@teacher.Id"><i class="fa fa-pencil-alt"></i></a>
-                                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@teacher.Id"><i class="fa fa-trash"></i></a>
+                            <td class="d-none d-md-table-cell">@user.Id</td>
+                            <td>@user.Name</td>
+                            <td>@user.Email</td>
+                            <td class="text-nowrap">
+                                <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@user.Id"><i class="fa fa-pencil-alt"></i></a>
+                                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@user.Id"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                     }
-
                     @if (!Model.Any())
                     {
                         <tr class="text-center">

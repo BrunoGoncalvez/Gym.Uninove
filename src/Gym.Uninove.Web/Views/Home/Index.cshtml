@@ -2,7 +2,124 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@* <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="@Url.Content("/images/carousel/carousel_1.jpg")" class="d-block w-100" alt="..." width="800" height="400">
+        </div>
+        <div class="carousel-item">
+            <img src="@Url.Content("/images/carousel/carousel_2.jpg")" class="d-block w-100" alt="..." width="800" height="400">
+        </div>
+        <div class="carousel-item">
+            <img src="@Url.Content("/images/carousel/carousel_3.jpg")" class="d-block w-100" alt="..." width="800" height="400">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-target="#carouselExampleControls" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </button>
+</div> *@
+
+@* New *@
+<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+        <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="@Url.Content("/images/carousel/carousel_1.jpg")" class="d-block w-100" alt="..." width="800" height="400">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Conheça a melhor academia da região!</h5>
+                <p>Venha descobrir por que somos a escolha número um para alcançar seus objetivos de fitness. Nossas instalações modernas e instrutores dedicados estão aqui para ajudá-lo a ter sucesso.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="@Url.Content("/images/carousel/carousel_2.jpg")" class="d-block w-100" alt="..." width="800" height="400">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Transforme sua vida com nosso programa de treinamento exclusivo!</h5>
+                <p>Descubra um novo nível de bem-estar e saúde conosco. Nossa abordagem personalizada ao treinamento garante resultados eficazes e duradouros. Junte-se a nós hoje!</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="@Url.Content("/images/carousel/carousel_3.jpg")" class="d-block w-100" alt="..." width="800" height="400">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Experimente uma variedade de aulas emocionantes!</h5>
+                <p>De yoga e pilates a treinamento de força e HIIT, temos uma variedade de aulas para atender a todos os níveis de condicionamento físico. Venha se juntar à nossa comunidade ativa hoje!</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-target="#carouselExampleCaptions" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-target="#carouselExampleCaptions" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Próximo</span>
+    </button>
 </div>
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Objetivos</h1>
+    <p class="lead text-center">
+        Na Academia Uninove, estamos comprometidos em ajudá-lo a alcançar seus objetivos de condicionamento físico e bem-estar. 
+        Com uma ampla gama de instalações modernas, equipamentos de última geração e uma equipe dedicada de instrutores qualificados, oferecemos 
+        uma experiência de treinamento excepcional para alunos de todos os níveis de condicionamento físico.
+    </p>
+</div>
+
+<div class="container">
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Bronze</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>10 users included</li>
+                    <li>2 GB of storage</li>
+                    <li>Email support</li>
+                    <li>Help center access</li>
+                </ul>
+                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button>
+            </div>
+        </div>
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Prata</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>20 users included</li>
+                    <li>10 GB of storage</li>
+                    <li>Priority email support</li>
+                    <li>Help center access</li>
+                </ul>
+                <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button>
+            </div>
+        </div>
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Diamante</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ mo</small></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>30 users included</li>
+                    <li>15 GB of storage</li>
+                    <li>Phone and email support</li>
+                    <li>Help center access</li>
+                </ul>
+                <button type="button" class="btn btn-lg btn-block btn-primary">Contact us</button>
+            </div>
+        </div>
+    </div>
+</div>
+

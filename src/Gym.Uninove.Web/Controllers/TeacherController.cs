@@ -1,9 +1,11 @@
 ﻿using Gym.Uninove.Core.Entities;
 using Gym.Uninove.Core.Interfaces.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gym.Uninove.Web.Controllers
 {
+    [Authorize(Policy = "AdminOnly")]
     public class TeacherController : Controller
     {
 
@@ -50,7 +52,6 @@ namespace Gym.Uninove.Web.Controllers
                 return View(teacher);
             }
         }
-
 
         public async Task<IActionResult> Edit(int id)
         {

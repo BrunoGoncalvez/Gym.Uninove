@@ -1,7 +1,10 @@
 ﻿using Gym.Uninove.Core.Entities;
 using Gym.Uninove.Core.Interfaces.Repository;
+using Gym.Uninove.Web.Models;
 using Gym.Uninove.Web.Models.ViewModels;
+using Gym.Uninove.Web.Services;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using X.PagedList;
 
 namespace Gym.Uninove.Web.Controllers
@@ -11,16 +14,29 @@ namespace Gym.Uninove.Web.Controllers
 
         private readonly IGymBranchRepository _gymRepository;
         private readonly IAddressRepository _addressRepository;
+        private readonly ImageUploadService _imageUploadService;
         private readonly int PageSize = 9; // Número de itens por página
 
-        public GymController(IGymBranchRepository gymRepository, IAddressRepository addressRepository)
+        public GymController(IGymBranchRepository gymRepository, IAddressRepository addressRepository, ImageUploadService imageUploadService)
         {
             this._gymRepository = gymRepository;
             this._addressRepository = addressRepository;
+            this._imageUploadService = imageUploadService;
         }
 
         public async Task<IActionResult> Index(int? page)
         {
+
+            var userSession = HttpContext.Session.GetString("CurrentUser");
+            UserSession userCurrent = null;
+
+            // Desserializa a string JSON para um objeto UserSession
+            if (!string.IsNullOrEmpty(userSession))
+            {
+                userCurrent = JsonConvert.DeserializeObject<UserSession>(userSession);
+                TempData["Admin"] = userCurrent.Role == "2" ? true : false;
+            }
+
 
             var pageNumber = page ?? 1; // Número da página atual
             var gyms = await _gymRepository.GetAll(); // Obtenha todos os registros (gym)
@@ -63,13 +79,25 @@ namespace Gym.Uninove.Web.Controllers
                     Name = gymViewModel.GymBranch.Name,
                     UnitNumber = gymViewModel.GymBranch.UnitNumber,
                     Phone = gymViewModel.GymBranch.Phone
-
                 };
 
                 if (!await this.IsGymBranchUniqueAsync(newGym)) 
                 {
                     ModelState.AddModelError(string.Empty, "UnitNumber, Phone, or Name must be unique");
                     return View(gymViewModel);
+                }
+
+                if (gymViewModel.ImageFile != null && gymViewModel.ImageFile.Length > 0)
+                {
+                    var uploadFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images/gym");
+                    var imagePath = await _imageUploadService.UploadImageAsync(gymViewModel.ImageFile, uploadFolder);
+                    gymViewModel.GymBranch.ImagePath = imagePath;
+
+                    newGym.ImagePath = gymViewModel.GymBranch.ImagePath;
+                }
+                else
+                {
+                    newGym.ImagePath = "/images/gym/default-gym-image.jpg";
                 }
 
                 await this._gymRepository.Add(newGym);

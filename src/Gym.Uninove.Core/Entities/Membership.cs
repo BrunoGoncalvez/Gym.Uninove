@@ -11,7 +11,9 @@ namespace Gym.Uninove.Core.Entities
 
         public string Description { get; set; }
 
-        public ICollection<User> Members { get; set; }
+
+        // TODO: Descomentar Members
+        //public ICollection<User> Members { get; set; }
 
     }
 }

@@ -6,7 +6,10 @@ namespace Gym.Uninove.Web.Models.ViewModels
     {
 
         public GymBranch GymBranch { get; set; }
+
         public Address Address { get; set; }
+
+        public IFormFile ImageFile { get; set; }
 
     }
 }
